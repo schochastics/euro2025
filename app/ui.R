@@ -44,118 +44,21 @@ my_theme <- bs_theme(
             width = 200,
             tags$div(
               class = "flag-grid",
-              actionButton(
-                inputId = "BEL",
-                label = HTML(
-                  "<img src='flags/BEL.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "DEN",
-                label = HTML(
-                  "<img src='flags/DEN.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "ENG",
-                label = HTML(
-                  "<img src='flags/ENG.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "ESP",
-                label = HTML(
-                  "<img src='flags/ESP.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "FIN",
-                label = HTML(
-                  "<img src='flags/FIN.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "FRA",
-                label = HTML(
-                  "<img src='flags/FRA.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "GER",
-                label = HTML(
-                  "<img src='flags/GER.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "ISL",
-                label = HTML(
-                  "<img src='flags/ISL.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "ITA",
-                label = HTML(
-                  "<img src='flags/ITA.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "NED",
-                label = HTML(
-                  "<img src='flags/NED.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "NOR",
-                label = HTML(
-                  "<img src='flags/NOR.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "POL",
-                label = HTML(
-                  "<img src='flags/POL.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "POR",
-                label = HTML(
-                  "<img src='flags/POR.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "SWE",
-                label = HTML(
-                  "<img src='flags/SWE.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "SUI",
-                label = HTML(
-                  "<img src='flags/SUI.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              ),
-              actionButton(
-                inputId = "WAL",
-                label = HTML(
-                  "<img src='flags/WAL.png' height='40px'/>"
-                ),
-                class = "btn-flag"
-              )
+              lapply(names(country_codes), function(ccode) {
+                actionButton(
+                  inputId = ccode,
+                  label = HTML(
+                    paste0(
+                      "<img src='flags/",
+                      ccode,
+                      ".png' alt='",
+                      country_codes[ccode],
+                      "' height = '40px'/>"
+                    )
+                  ),
+                  class = "btn-flag"
+                )
+              })
             )
           )
         )
@@ -163,8 +66,8 @@ my_theme <- bs_theme(
 
       # Panel 2: Placeholder
       nav_panel(
-        title = "Pill 2",
-        value = "pill2_tab",
+        title = "Locations",
+        value = "loc_tab",
         "Content for Pill 2…"
       ),
 
