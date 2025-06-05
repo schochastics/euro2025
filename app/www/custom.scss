@@ -1,0 +1,30 @@
+.container-fluid{
+  padding: 0;
+}
+
+.nav {
+  background-color: #211431;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 2rem;
+}
+
+.nav-pills .nav-link {
+  color: #FFFFFF;
+  background-color: #211431;
+  border-radius: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+/* On hover: lighter gray border + slightly lighter BG */
+.nav-pills .nav-link:hover {
+  background-color: #211431;
+  color: #FFC107;
+}
+
+/* Active pill: black text on bright yellow */
+.nav-pills .nav-link.active {
+  background-color: #FFC107 !important;
+  /* bootstrap’s “warning” yellow */
+  color: #000000 !important;
+}
