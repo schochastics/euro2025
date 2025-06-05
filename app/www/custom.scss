@@ -12,7 +12,7 @@
 .nav-pills .nav-link {
   color: #FFFFFF;
   background-color: #211431;
-  border-radius: 0.25rem;
+  border-radius: 1rem;
   margin-right: 0.25rem;
 }
 
@@ -24,7 +24,49 @@
 
 /* Active pill: black text on bright yellow */
 .nav-pills .nav-link.active {
-  background-color: #FFC107 !important;
+  background-color: #ff9e33 !important;
   /* bootstrap’s “warning” yellow */
   color: #000000 !important;
+}
+
+// .btn-flag {
+//   background-color: transparent !important;
+//   border: none !important;
+//   padding: 0 !important;
+//   width: auto !important;
+// }
+
+// .btn-flag:hover,
+// .btn-flag:focus {
+//   background-color: transparent !important;
+//   box-shadow: none !important;
+// }
+
+/* Container that holds all flag buttons in rows of three */
+.flag-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.flag-grid .btn-flag {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin-bottom: 10px;
+  width: 40%;
+  /* roughly 3 per row */
+  display: flex;
+  justify-content: center;
+}
+
+/* Disable any hover/focus highlight on .btn-flag */
+.flag-grid .btn-flag:hover,
+.flag-grid .btn-flag:focus {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.country {
+  font-weight: 700;
 }
