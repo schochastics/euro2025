@@ -1,0 +1,21 @@
+/* ─── Background for the pill nav container ───────────────────────────────── */
+.nav-pills {
+  background-color: #9400FF;
+}
+
+/* ─── Normal (inactive) link text color ──────────────────────────────────────── */
+.nav-pills .nav-link {
+  color: white !important;
+}
+
+/* ─── Hover state: change text color to #ff9e33 ──────────────────────────────── */
+.nav-pills .nav-link:hover {
+  color: #ff9e33 !important;
+}
+
+/* ─── Active pill: background #ff9e33, black text, rounded corners ───────────── */
+.nav-pills .nav-link.active {
+  background-color: #ff9e33 !important;
+  color: black       !important;
+  border-radius: 5px  !important;
+}
