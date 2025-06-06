@@ -118,6 +118,9 @@ server <- function(input, output) {
         lng = ~longitude,
         lat = ~latitude,
         popup = ~ paste(
+          "<strong>Country:</strong>",
+          Land,
+          "<br>",
           "<strong>Hotel:</strong>",
           Hotel,
           "<br>",
@@ -126,7 +129,7 @@ server <- function(input, output) {
         ),
         icon = flag_icons
       ) |>
-      setView(lng = 8.2275, lat = 46.8182, zoom = 9) |>
+      setView(lng = 8.2275, lat = 46.8182, zoom = 8) |>
       addPolygons(
         color = "#444444",
         weight = 1,

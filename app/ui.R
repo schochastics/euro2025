@@ -73,7 +73,7 @@ my_theme <- bs_theme(
             class = "bg-purple",
             "Stadiums and Team Hotels"
           ),
-          leafletOutput("map", height = "400px", width = "50%")
+          leafletOutput("map", height = "600px", width = "100%")
         )
       ),
 
