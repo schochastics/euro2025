@@ -147,3 +147,62 @@ logo <- makeIcon(
   iconWidth = 30 / 2,
   iconHeight = 36 / 2
 )
+
+make_table <- function(standings_complete, group) {
+  standings_complete |>
+    dplyr::filter(Group == group) |>
+    select(-Group) |>
+    reactable(
+      columns = list(
+        Team = colDef(
+          minWidth = 100,
+          name = "",
+          html = TRUE,
+          cell = function(value) {
+            code <- name_to_code[[value]]
+            if (is.null(code)) return(value)
+            img_tag <- img(
+              src = sprintf(
+                "flags/%s.png",
+                code
+              ),
+              style = "height: 20px; margin-right: 8px;",
+              alt = code
+            )
+            tagList(
+              div(
+                style = "display: inline-flex; align-items: center;",
+                img_tag,
+                value
+              )
+            )
+          }
+        ),
+        Played = colDef(name = "Played"),
+        Won = colDef(name = "Won"),
+        Drawn = colDef(name = "Drawn"),
+        Lost = colDef(name = "Lost"),
+        For = colDef(name = "For"),
+        Against = colDef(name = "Against"),
+        GoalDifference = colDef(name = "Goal Difference"),
+        Points = colDef(name = "Points", style = list(fontWeight = "bold"))
+      ),
+      bordered = FALSE,
+      highlight = TRUE,
+      striped = FALSE,
+      fullWidth = TRUE,
+      style = list(border = "none"),
+      defaultColDef = colDef(
+        minWidth = 50,
+        style = list(borderRight = "none"),
+        headerStyle = list(fontWeight = "normal")
+      ),
+      rowStyle = function(index) {
+        if (index %in% c(1, 2)) {
+          list(background = "#ffe1c1")
+        } else {
+          NULL
+        }
+      }
+    )
+}

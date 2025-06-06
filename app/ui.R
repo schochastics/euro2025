@@ -81,7 +81,42 @@ my_theme <- bs_theme(
       nav_panel(
         title = "Standings",
         value = "standings_tab",
-        "Content for Pill 3…"
+        fluidRow(
+          column(
+            width = 6,
+            div(
+              h2("Group A", class = "country"),
+              reactableOutput("tableA", width = "100%"),
+              class = "table-container",
+            )
+          ),
+          column(
+            width = 6,
+            div(
+              h2("Group B", class = "country"),
+              reactableOutput("tableB", width = "100%"),
+              class = "table-container",
+            )
+          )
+        ),
+        fluidRow(
+          column(
+            width = 6,
+            div(
+              h2("Group C", class = "country"),
+              reactableOutput("tableC", width = "100%"),
+              class = "table-container",
+            )
+          ),
+          column(
+            width = 6,
+            div(
+              h2("Group D", class = "country"),
+              reactableOutput("tableD", width = "100%"),
+              class = "table-container",
+            )
+          )
+        )
       ),
 
       # Panel 4: Placeholder

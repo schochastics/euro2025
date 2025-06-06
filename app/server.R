@@ -119,4 +119,20 @@ server <- function(input, output) {
         fillOpacity = 0.25
       )
   })
+
+  output$tableA <- renderReactable({
+    make_table(standings_complete, "A")
+  })
+
+  output$tableB <- renderReactable({
+    make_table(standings_complete, "B")
+  })
+
+  output$tableC <- renderReactable({
+    make_table(standings_complete, "C")
+  })
+
+  output$tableD <- renderReactable({
+    make_table(standings_complete, "D")
+  })
 }
