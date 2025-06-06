@@ -16,33 +16,16 @@
   margin-right: 0.25rem;
 }
 
-/* On hover: lighter gray border + slightly lighter BG */
 .nav-pills .nav-link:hover {
   background-color: #211431;
-  color: #FFC107;
+  color: #ff9e33;
 }
 
-/* Active pill: black text on bright yellow */
 .nav-pills .nav-link.active {
   background-color: #ff9e33 !important;
-  /* bootstrap’s “warning” yellow */
   color: #000000 !important;
 }
 
-// .btn-flag {
-//   background-color: transparent !important;
-//   border: none !important;
-//   padding: 0 !important;
-//   width: auto !important;
-// }
-
-// .btn-flag:hover,
-// .btn-flag:focus {
-//   background-color: transparent !important;
-//   box-shadow: none !important;
-// }
-
-/* Container that holds all flag buttons in rows of three */
 .flag-grid {
   display: flex;
   flex-wrap: wrap;
@@ -69,4 +52,8 @@
 
 .country {
   font-weight: 700;
+}
+.bg-purple {
+  background-color: #211431 !important;
+  color: #FFFFFF !important;
 }

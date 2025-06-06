@@ -68,7 +68,13 @@ my_theme <- bs_theme(
       nav_panel(
         title = "Locations",
         value = "loc_tab",
-        "Content for Pill 2…"
+        card(
+          card_header(
+            class = "bg-purple",
+            "Stadiums and Team Hotels"
+          ),
+          leafletOutput("map", height = "400px", width = "50%")
+        )
       ),
 
       # Panel 3: Placeholder
