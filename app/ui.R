@@ -79,8 +79,8 @@ my_theme <- bs_theme(
 
       # Panel 3: Placeholder
       nav_panel(
-        title = "Pill 3",
-        value = "pill3_tab",
+        title = "Standings",
+        value = "standings_tab",
         "Content for Pill 3…"
       ),
 

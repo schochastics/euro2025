@@ -77,24 +77,6 @@ server <- function(input, output) {
   })
 
   output$map <- renderLeaflet({
-    switzerland_sf <- readRDS("data/switzerland_sf.rds")
-    hotels <- readr::read_csv("data/geocoded_hotels.csv")
-    stadiums <- readr::read_csv("data/stadiums.csv")
-
-    hotels$flag_url <- paste0("https://flagcdn.com/w20/", hotels$iso2, ".png")
-
-    flag_icons <- makeIcon(
-      iconUrl = hotels$flag_url,
-      iconWidth = 20,
-      iconHeight = 15
-    )
-
-    logo <- makeIcon(
-      iconUrl = "https://upload.wikimedia.org/wikipedia/commons/e/e7/UEFA_Women%27s_Euro_Switzerland_2025_Logo.png",
-      iconWidth = 30 / 2,
-      iconHeight = 36 / 2
-    )
-
     leaflet(data = switzerland_sf) |>
       addTiles() |>
       addMarkers(
