@@ -238,4 +238,12 @@ server <- function(input, output) {
       )
     })
   })
+
+  output$all_time_appearance <- renderReactable({
+    make_simple_table(player_appearance)
+  })
+
+  output$all_time_scorer <- renderReactable({
+    make_simple_table(player_scorer)
+  })
 }

@@ -11,6 +11,7 @@ appearance <- map_dfr(urls, function(url) {
 })
 appearance |>
   rename("Country" = `Team(s)`) |>
+  mutate(Player = str_remove(Player, "\\s+\\*")) |>
   saveRDS("app/data/all_time_appearance.rds")
 
 urls <- glue::glue(
@@ -26,3 +27,16 @@ scorer |>
   select(Player, "Country" = `Team(s)`, "Matches" = `M.`, "Goals" = goals) |>
   mutate(Player = str_remove(Player, "\\s+\\*")) |>
   saveRDS("app/data/all_time_scorer.rds")
+
+readRDS("app/data/all_time_scorer.rds") |>
+  reactable(
+    columns = list(
+      Player = colDef(name = "Player"),
+      Country = colDef(name = "Country"),
+      Matches = colDef(name = "Matches"),
+      Goals = colDef(name = "Goals")
+    ),
+    defaultPageSize = 25,
+    searchable = FALSE,
+    filterable = TRUE
+  )

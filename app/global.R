@@ -56,6 +56,8 @@ standings_complete <- readRDS("data/standings_complete.rds")
 fifa_ranking <- readRDS("data/fifa_ranking.rds")
 forecast <- readRDS("data/tournament_probabilities.rds")
 games <- readRDS("data/games.rds")
+player_appearance <- readRDS("data/all_time_appearance.rds")
+player_scorer <- readRDS("data/all_time_scorer.rds")
 
 hotels$flag_url <- paste0("https://flagcdn.com/w20/", hotels$iso2, ".png")
 
@@ -183,5 +185,16 @@ make_forecast <- function(df) {
     defaultColDef = colDef(
       minWidth = 50
     )
+  )
+}
+
+make_simple_table <- function(df, ...) {
+  reactable(
+    df,
+    defaultPageSize = 25,
+    searchable = FALSE,
+    filterable = TRUE,
+    highlight = TRUE,
+    ...
   )
 }

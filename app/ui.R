@@ -210,6 +210,25 @@ ui <- page_fluid(
       nav_panel(
         "All-time Player stats",
         value = "player_stats_tab",
+        fluidRow(
+          column(1), # Left spacer
+          column(
+            10,
+            fluidRow(
+              column(
+                6,
+                h4("All Time Appearances"),
+                reactableOutput("all_time_appearance", width = "100%")
+              ),
+              column(
+                6,
+                h4("All Time Goal Scorers"),
+                reactableOutput("all_time_scorer", width = "100%")
+              )
+            )
+          ),
+          column(1) # Right spacer
+        )
       ),
       "----",
       "Description:",
