@@ -162,13 +162,13 @@ ui <- page_fluid(
         "Head-to_head",
         value = "head_to_head_tab",
         fluidPage(
-          titlePanel("Head-to-Head: Football Nations"),
+          titlePanel("Head-to-Head Comparison"),
 
           fluidRow(
             column(1),
 
             column(
-              4,
+              3,
               div(
                 style = "text-align: center;",
                 selectInput(
@@ -182,20 +182,16 @@ ui <- page_fluid(
             ),
 
             column(
-              2,
+              4,
               div(
                 style = "text-align: center;",
                 tags$h3("VS", style = "text-align: center; margin-top: 60px;"),
-                tags$div(
-                  id = "stats",
-                  "Stats will go here",
-                  style = "text-align: center; margin-top: 20px;"
-                )
+                uiOutput("stats_box")
               )
             ),
 
             column(
-              4,
+              3,
               div(
                 style = "text-align: center;",
                 selectInput(

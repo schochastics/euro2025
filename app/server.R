@@ -153,4 +153,89 @@ server <- function(input, output) {
     code <- names(country_codes)[country_codes == input$country2]
     img(src = paste0("flags/", code, ".png"), height = "100px")
   })
+
+  observeEvent(c(input$country1, input$country2), {
+    req(input$country1, input$country2)
+    country1 <- input$country1
+    country2 <- input$country2
+
+    head_to_head <- games |>
+      dplyr::filter(
+        (home_team == country1 & away_team == country2) |
+          (home_team == country2 & away_team == country1)
+      ) |>
+      dplyr::mutate(
+        country1_score = dplyr::if_else(
+          home_team == country1,
+          home_score,
+          away_score
+        ),
+        country2_score = dplyr::if_else(
+          home_team == country2,
+          home_score,
+          away_score
+        ),
+        result = dplyr::case_when(
+          country1_score > country2_score ~ "W",
+          country1_score < country2_score ~ "L",
+          TRUE ~ "D"
+        )
+      )
+
+    summary_stats <- head_to_head |>
+      dplyr::summarise(
+        Wins = sum(result == "W"),
+        Draws = sum(result == "D"),
+        Losses = sum(result == "L"),
+        Goals_For = sum(country1_score),
+        Goals_Against = sum(country2_score),
+        Last_3_Results = paste0(rev(tail(result, 3)), collapse = "")
+      )
+
+    # Defensive check in case there's no data
+    if (nrow(summary_stats) == 0) {
+      output$stats_box <- renderUI({
+        div("No matches found.", class = "stat-section")
+      })
+      return()
+    }
+
+    # Extract values
+    wins <- summary_stats$Wins
+    draws <- summary_stats$Draws
+    losses <- summary_stats$Losses
+    goals_text <- paste0(
+      summary_stats$Goals_For,
+      " : ",
+      summary_stats$Goals_Against
+    )
+    results <- strsplit(summary_stats$Last_3_Results, "")[[1]]
+
+    # Render UI
+    output$stats_box <- renderUI({
+      tagList(
+        div(
+          class = "stat-section",
+          div(
+            span("Wins", class = "circle-label"),
+            span("Draws", class = "circle-label"),
+            span("Losses", class = "circle-label")
+          ),
+          div(
+            span(wins, class = "circle"),
+            span(draws, class = "circle"),
+            span(losses, class = "circle")
+          ),
+          tags$h3("Goal Difference", style = "margin-top: 20px;"),
+          div(class = "goals-text", goals_text),
+          tags$h3("Last 3 Matches", style = "margin-top: 20px;"),
+          div(
+            lapply(results, function(r) {
+              span(r, class = paste("result-circle", paste0("result-", r)))
+            })
+          )
+        )
+      )
+    })
+  })
 }
