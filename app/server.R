@@ -139,4 +139,8 @@ server <- function(input, output) {
   output$fifa_ranking <- renderReactable({
     make_fifa(fifa_ranking)
   })
+
+  output$forecast <- renderReactable({
+    make_forecast(forecast)
+  })
 }

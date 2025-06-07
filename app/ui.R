@@ -128,7 +128,24 @@ ui <- page_fluid(
     nav_panel(
       title = "Predictions",
       value = "prediction_tab",
-      reactableOutput("fifa_ranking", width = "100%"),
+      fluidRow(
+        column(
+          width = 6,
+          div(
+            h2("Current FIFA Ranking", class = "country"),
+            reactableOutput("fifa_ranking", width = "100%"),
+            class = "table-container",
+          )
+        ),
+        column(
+          width = 6,
+          div(
+            h2("Prediction", class = "country"),
+            reactableOutput("forecast", width = "100%"),
+            class = "table-container",
+          )
+        )
+      )
     ),
 
     # ───────────────────────────────────────────────────────────────────────────

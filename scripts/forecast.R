@@ -106,3 +106,5 @@ P_knockout <- P_group[,, 1] + 0.5 * P_group[,, 2]
 
 
 saveRDS(rank_tbl_grp, "app/data/fifa_ranking.rds")
+saveRDS(P_group, "app/data/P_group.rds")
+saveRDS(P_knockout, "app/data/P_knockout.rds")

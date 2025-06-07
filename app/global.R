@@ -46,6 +46,11 @@ name_to_code <- c(
 switzerland_sf <- readRDS("data/switzerland_sf.rds")
 hotels <- readr::read_csv("data/geocoded_hotels.csv")
 stadiums <- readr::read_csv("data/stadiums.csv")
+# Data for standings table
+standings_complete <- readRDS("data/standings_complete.rds")
+fifa_ranking <- readRDS("data/fifa_ranking.rds")
+forecast <- readRDS("data/tournament_probabilities.rds")
+
 
 hotels$flag_url <- paste0("https://flagcdn.com/w20/", hotels$iso2, ".png")
 
@@ -60,10 +65,6 @@ logo <- makeIcon(
   iconWidth = 30 / 2,
   iconHeight = 36 / 2
 )
-
-# Data for standings table
-standings_complete <- readRDS("data/standings_complete.rds")
-fifa_ranking <- readRDS("data/fifa_ranking.rds")
 
 make_table <- function(standings_complete, group) {
   standings_complete |>
@@ -132,7 +133,7 @@ make_fifa <- function(fifa_ranking) {
       columns = list(
         name = colDef(
           minWidth = 100,
-          name = "Country",
+          name = "",
           html = TRUE,
           cell = function(value) {
             code <- name_to_code[[value]]
@@ -166,4 +167,85 @@ make_fifa <- function(fifa_ranking) {
       striped = FALSE,
       highlight = TRUE
     )
+}
+
+make_forecast <- function(df) {
+  reactable(
+    arrange(df, -winner),
+    defaultPageSize = 16,
+    columns = list(
+      team = colDef(
+        minWidth = 100,
+        name = "",
+        html = TRUE,
+        cell = function(value) {
+          code <- name_to_code[[value]]
+          if (is.null(code)) return(value)
+          img_tag <- img(
+            src = sprintf(
+              "flags/%s.png",
+              code
+            ),
+            style = "height: 20px; margin-right: 8px;",
+            alt = code
+          )
+          tagList(
+            div(
+              style = "display: inline-flex; align-items: center;",
+              img_tag,
+              value
+            )
+          )
+        }
+      ),
+      winner = colDef(
+        name = "Winner",
+        format = colFormat(digits = 2),
+        style = function(value) {
+          txt <- ifelse(value < 35, "black", "white")
+          list(color = txt, background = "#ff9e33")
+        }
+      ),
+      final = colDef(
+        name = "Final",
+        format = colFormat(digits = 2),
+        style = function(value) {
+          txt <- ifelse(value < 35, "black", "white")
+          list(color = txt, background = "#ff9e33")
+        }
+      ),
+      semi = colDef(
+        name = "Semi",
+        format = colFormat(digits = 2),
+        style = function(value) {
+          txt <- ifelse(value < 35, "black", "white")
+          list(color = txt, background = "#ff9e33")
+        }
+      ),
+      quarter = colDef(
+        name = "Quarter",
+        format = colFormat(digits = 2),
+        style = function(value) {
+          txt <- ifelse(value < 35, "black", "white")
+          list(color = txt, background = "#ff9e33")
+        }
+      ),
+      group_first = colDef(
+        name = "Group 1st",
+        format = colFormat(digits = 2),
+        style = function(value) {
+          txt <- ifelse(value < 35, "black", "white")
+          list(color = txt, background = "#ff9e33")
+        }
+      ),
+      group_second = colDef(
+        name = "Group 2nd",
+        format = colFormat(digits = 2),
+        style = function(value) {
+          txt <- ifelse(value < 35, "black", "white")
+          list(color = txt, background = "#ff9e33")
+        }
+      )
+    )
+  )
 }

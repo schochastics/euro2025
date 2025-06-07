@@ -1,4 +1,7 @@
-source("scripts/forecast.R")
+rank_tbl_grp <- readRDS("app/data/fifa_ranking.rds")
+P_group <- readRDS("app/data/P_group.rds")
+P_knockout <- readRDS("app/data/P_knockout.rds")
+
 n_teams <- 16
 teams_per_group <- 4
 n_groups <- n_teams / teams_per_group # = 8
@@ -171,35 +174,11 @@ WF
 
 tibble(
   team = rank_tbl_grp$name,
-  winner = WF,
-  final = SF,
-  semi = rowSums(Q),
-  group_first = rowSums(G),
-  group_second = colSums(G)
+  winner = 100 * WF,
+  final = 100 * SF,
+  semi = 100 * rowSums(Q),
+  quarter = 100 * (rowSums(G) + colSums(G)),
+  group_first = 100 * rowSums(G),
+  group_second = 100 * colSums(G)
 ) |>
-  reactable::reactable(
-    defaultPageSize = 16,
-    columns = list(
-      team = reactable::colDef(name = "Team"),
-      winner = reactable::colDef(
-        name = "Win Tournament",
-        format = reactable::colFormat(digits = 4)
-      ),
-      final = reactable::colDef(
-        name = "Reach Final",
-        format = reactable::colFormat(digits = 4)
-      ),
-      semi = reactable::colDef(
-        name = "Reach Semifinal",
-        format = reactable::colFormat(digits = 4)
-      ),
-      group_first = reactable::colDef(
-        name = "Group Winner",
-        format = reactable::colFormat(digits = 4)
-      ),
-      group_second = reactable::colDef(
-        name = "Group Runner-up",
-        format = reactable::colFormat(digits = 4)
-      )
-    )
-  )
+  saveRDS("app/data/tournament_probabilities.rds")
