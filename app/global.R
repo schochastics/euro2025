@@ -71,36 +71,40 @@ logo <- makeIcon(
   iconHeight = 36 / 2
 )
 
+country_cell <- function(...) {
+  colDef(
+    minWidth = 100,
+    name = "",
+    html = TRUE,
+    cell = function(value) {
+      code <- name_to_code[[value]]
+      if (is.null(code)) return(value)
+      img_tag <- img(
+        src = sprintf(
+          "flags/%s.png",
+          code
+        ),
+        style = "height: 20px; margin-right: 8px;",
+        alt = code
+      )
+      tagList(
+        div(
+          style = "display: inline-flex; align-items: center;",
+          img_tag,
+          value
+        )
+      )
+    },
+    ...
+  )
+}
 make_table <- function(standings_complete, group) {
   standings_complete |>
     dplyr::filter(Group == group) |>
     select(-Group) |>
     reactable(
       columns = list(
-        Team = colDef(
-          minWidth = 80,
-          name = "",
-          html = TRUE,
-          cell = function(value) {
-            code <- name_to_code[[value]]
-            if (is.null(code)) return(value)
-            img_tag <- img(
-              src = sprintf(
-                "flags/%s.png",
-                code
-              ),
-              style = "height: 20px; margin-right: 8px;",
-              alt = code
-            )
-            tagList(
-              div(
-                style = "display: inline-flex; align-items: center;",
-                img_tag,
-                value
-              )
-            )
-          }
-        ),
+        Team = country_cell(),
         Played = colDef(name = "Played"),
         Won = colDef(name = "Won"),
         Drawn = colDef(name = "Drawn"),
@@ -136,30 +140,7 @@ make_fifa <- function(fifa_ranking) {
     arrange(rank) |>
     reactable(
       columns = list(
-        name = colDef(
-          minWidth = 100,
-          name = "",
-          html = TRUE,
-          cell = function(value) {
-            code <- name_to_code[[value]]
-            if (is.null(code)) return(value)
-            img_tag <- img(
-              src = sprintf(
-                "flags/%s.png",
-                code
-              ),
-              style = "height: 20px; margin-right: 8px;",
-              alt = code
-            )
-            tagList(
-              div(
-                style = "display: inline-flex; align-items: center;",
-                img_tag,
-                value
-              )
-            )
-          }
-        ),
+        name = country_cell(),
         rank = colDef(name = "Global Rank", align = "center"),
         totalPoints = colDef(
           name = "Points",
@@ -191,30 +172,7 @@ make_forecast <- function(df) {
     arrange(df, -winner),
     defaultPageSize = 16,
     columns = list(
-      team = colDef(
-        minWidth = 100,
-        name = "",
-        html = TRUE,
-        cell = function(value) {
-          code <- name_to_code[[value]]
-          if (is.null(code)) return(value)
-          img_tag <- img(
-            src = sprintf(
-              "flags/%s.png",
-              code
-            ),
-            style = "height: 20px; margin-right: 8px;",
-            alt = code
-          )
-          tagList(
-            div(
-              style = "display: inline-flex; align-items: center;",
-              img_tag,
-              value
-            )
-          )
-        }
-      ),
+      team = country_cell(),
       winner = forecast_cell("Winner"),
       final = forecast_cell("Final"),
       semi = forecast_cell("Semi"),
