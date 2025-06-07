@@ -55,7 +55,7 @@ stadiums <- readr::read_csv("data/stadiums.csv")
 standings_complete <- readRDS("data/standings_complete.rds")
 fifa_ranking <- readRDS("data/fifa_ranking.rds")
 forecast <- readRDS("data/tournament_probabilities.rds")
-
+games <- readRDS("data/games.rds")
 
 hotels$flag_url <- paste0("https://flagcdn.com/w20/", hotels$iso2, ".png")
 

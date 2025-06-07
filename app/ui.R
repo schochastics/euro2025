@@ -157,8 +157,60 @@ ui <- page_fluid(
     nav_spacer(),
     # ───────────────────────────────────────────────────────────────────────────
     nav_menu(
-      title = "Other links",
-      nav_panel("Panel D", "Panel D content…"),
+      title = "More",
+      nav_panel(
+        "Head-to_head",
+        value = "head_to_head_tab",
+        fluidPage(
+          titlePanel("Head-to-Head: Football Nations"),
+
+          fluidRow(
+            column(1),
+
+            column(
+              4,
+              div(
+                style = "text-align: center;",
+                selectInput(
+                  "country1",
+                  "Select Country 1:",
+                  choices = unname(country_codes),
+                  selected = unname(country_codes[1])
+                ),
+                uiOutput("flag1")
+              )
+            ),
+
+            column(
+              2,
+              div(
+                style = "text-align: center;",
+                tags$h3("VS", style = "text-align: center; margin-top: 60px;"),
+                tags$div(
+                  id = "stats",
+                  "Stats will go here",
+                  style = "text-align: center; margin-top: 20px;"
+                )
+              )
+            ),
+
+            column(
+              4,
+              div(
+                style = "text-align: center;",
+                selectInput(
+                  "country2",
+                  "Select Country 2:",
+                  choices = unname(country_codes),
+                  selected = unname(country_codes[2])
+                ),
+                uiOutput("flag2")
+              )
+            ),
+            column(1)
+          )
+        )
+      ),
       "----",
       "Description:",
       nav_item(

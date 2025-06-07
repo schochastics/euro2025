@@ -143,4 +143,14 @@ server <- function(input, output) {
   output$forecast <- renderReactable({
     make_forecast(forecast)
   })
+
+  output$flag1 <- renderUI({
+    code <- names(country_codes)[country_codes == input$country1]
+    img(src = paste0("flags/", code, ".png"), height = "100px")
+  })
+
+  output$flag2 <- renderUI({
+    code <- names(country_codes)[country_codes == input$country2]
+    img(src = paste0("flags/", code, ".png"), height = "100px")
+  })
 }
