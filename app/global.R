@@ -155,11 +155,15 @@ make_fifa <- function(fifa_ranking) {
           }
         ),
         rank = colDef(name = "Global Rank", align = "center"),
-        totalPoints = colDef(name = "Points", align = "center"),
+        totalPoints = colDef(
+          name = "Points",
+          align = "right",
+          style = list(fontWeight = "bold")
+        ),
         group = colDef(name = "Group", align = "center")
       ),
       defaultPageSize = 16,
-      striped = TRUE,
+      striped = FALSE,
       highlight = TRUE
     )
 }
