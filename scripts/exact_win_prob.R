@@ -144,33 +144,33 @@ for (i in g3_teams) {
   }
 }
 
-SF <- rep(0.0, n_teams)
+SF <- matrix(0.0, nrow = n_teams, ncol = n_teams)
 
 s1_teams <- unlist(group_teams[1:2])
 s2_teams <- unlist(group_teams[3:4])
 
 for (i in s1_teams) {
-  for (j in s1_teams) {
-    if (i != j) {
-      SF[i] <- SF[i] + Q[i, j] * P_knockout[i, j]
-      SF[j] <- SF[j] + Q[i, j] * P_knockout[j, i]
-    }
-  }
-}
-for (i in s2_teams) {
-  for (j in s2_teams) {
-    if (i != j) {
-      SF[i] <- SF[i] + Q[i, j] * P_knockout[i, j]
-      SF[j] <- SF[j] + Q[i, j] * P_knockout[j, i]
+  for (k in s2_teams) {
+    for (j in setdiff(s1_teams, i)) {
+      for (l in setdiff(s2_teams, j)) {
+        p <- Q[i, j] * Q[k, l]
+        SF[i, j] <- SF[i, j] + p * (P_knockout[i, l] * P_knockout[j, k])
+        SF[i, k] <- SF[i, k] + p * (P_knockout[i, l] * P_knockout[k, j])
+        SF[l, j] <- SF[l, j] + p * (P_knockout[l, i] * P_knockout[j, k])
+        SF[l, k] <- SF[l, k] + p * (P_knockout[l, i] * P_knockout[k, j])
+      }
     }
   }
 }
 
+
 WF <- rep(0.0, n_teams)
-for (i in s1_teams) {
-  for (j in s2_teams) {
-    WF[i] <- WF[i] + SF[i] * SF[j] * P_knockout[i, j]
-    WF[j] <- WF[j] + SF[i] * SF[j] * P_knockout[j, i]
+for (i in seq_len(n_teams)) {
+  for (j in seq_len(n_teams)) {
+    if (i != j) {
+      WF[i] <- WF[i] + SF[i, j] * P_knockout[i, j]
+      WF[j] <- WF[j] + SF[i, j] * P_knockout[j, i]
+    }
   }
 }
 
@@ -178,7 +178,7 @@ for (i in s1_teams) {
 res <- tibble(
   team = rank_tbl_grp$name,
   winner = 100 * WF,
-  final = 100 * SF,
+  final = 100 * (rowSums(SF) + colSums(SF)),
   semi = 100 * (rowSums(Q) + colSums(Q)),
   quarter = 100 * (rowSums(G) + colSums(G)),
   group_first = 100 * rowSums(G),
