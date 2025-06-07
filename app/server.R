@@ -135,4 +135,20 @@ server <- function(input, output) {
   output$tableD <- renderReactable({
     make_table(standings_complete, "D")
   })
+
+  output$fifa_ranking <- renderReactable({
+    fifa_ranking |>
+      arrange(rank) |>
+      reactable(
+        columns = list(
+          name = colDef(name = "Country"),
+          rank = colDef(name = "Rank", align = "center"),
+          points = colDef(name = "Points", align = "center"),
+          group = colDef(name = "Group", align = "center")
+        ),
+        defaultPageSize = 16,
+        striped = TRUE,
+        highlight = TRUE
+      )
+  })
 }

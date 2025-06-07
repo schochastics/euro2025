@@ -44,7 +44,7 @@ logo <- makeIcon(
 
 # Data for standings table
 standings_complete <- readRDS("data/standings_complete.rds")
-
+fifa_rankings <- readRDS("data/fifa_rankings.rds")
 
 make_table <- function(standings_complete, group) {
   name_to_code <- c(
