@@ -3,6 +3,11 @@ library(reactable)
 library(htmltools)
 library(leaflet)
 
+prob_col <- function(x) {
+  get_color <- colorRamp(c("#ffffff", "#ff9e33"))
+  rgb(get_color(x), maxColorValue = 255)
+}
+
 # Define country codes and names for the flags
 country_codes <- c(
   BEL = "Belgium",
@@ -203,7 +208,7 @@ make_forecast <- function(df) {
         format = colFormat(digits = 2),
         style = function(value) {
           txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = "#ff9e33")
+          list(color = txt, background = prob_col(value / 100))
         }
       ),
       final = colDef(
@@ -211,7 +216,7 @@ make_forecast <- function(df) {
         format = colFormat(digits = 2),
         style = function(value) {
           txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = "#ff9e33")
+          list(color = txt, background = prob_col(value / 100))
         }
       ),
       semi = colDef(
@@ -219,7 +224,7 @@ make_forecast <- function(df) {
         format = colFormat(digits = 2),
         style = function(value) {
           txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = "#ff9e33")
+          list(color = txt, background = prob_col(value / 100))
         }
       ),
       quarter = colDef(
@@ -227,7 +232,7 @@ make_forecast <- function(df) {
         format = colFormat(digits = 2),
         style = function(value) {
           txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = "#ff9e33")
+          list(color = txt, background = prob_col(value / 100))
         }
       ),
       group_first = colDef(
@@ -235,7 +240,7 @@ make_forecast <- function(df) {
         format = colFormat(digits = 2),
         style = function(value) {
           txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = "#ff9e33")
+          list(color = txt, background = prob_col(value / 100))
         }
       ),
       group_second = colDef(
@@ -243,7 +248,7 @@ make_forecast <- function(df) {
         format = colFormat(digits = 2),
         style = function(value) {
           txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = "#ff9e33")
+          list(color = txt, background = prob_col(value / 100))
         }
       )
     )
