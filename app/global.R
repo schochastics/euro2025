@@ -174,6 +174,18 @@ make_fifa <- function(fifa_ranking) {
     )
 }
 
+forecast_cell <- function(name, ...) {
+  colDef(
+    name = name,
+    format = colFormat(digits = 2),
+    style = function(value) {
+      txt <- ifelse(value < 45, "black", "white")
+      list(color = txt, background = prob_col(value / 100))
+    },
+    ...
+  )
+}
+
 make_forecast <- function(df) {
   reactable(
     arrange(df, -winner),
@@ -203,54 +215,15 @@ make_forecast <- function(df) {
           )
         }
       ),
-      winner = colDef(
-        name = "Winner",
-        format = colFormat(digits = 2),
-        style = function(value) {
-          txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = prob_col(value / 100))
-        }
-      ),
-      final = colDef(
-        name = "Final",
-        format = colFormat(digits = 2),
-        style = function(value) {
-          txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = prob_col(value / 100))
-        }
-      ),
-      semi = colDef(
-        name = "Semi",
-        format = colFormat(digits = 2),
-        style = function(value) {
-          txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = prob_col(value / 100))
-        }
-      ),
-      quarter = colDef(
-        name = "Quarter",
-        format = colFormat(digits = 2),
-        style = function(value) {
-          txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = prob_col(value / 100))
-        }
-      ),
-      group_first = colDef(
-        name = "Group 1st",
-        format = colFormat(digits = 2),
-        style = function(value) {
-          txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = prob_col(value / 100))
-        }
-      ),
-      group_second = colDef(
-        name = "Group 2nd",
-        format = colFormat(digits = 2),
-        style = function(value) {
-          txt <- ifelse(value < 35, "black", "white")
-          list(color = txt, background = prob_col(value / 100))
-        }
-      )
+      winner = forecast_cell("Winner"),
+      final = forecast_cell("Final"),
+      semi = forecast_cell("Semi"),
+      quarter = forecast_cell("Quarter"),
+      group_first = forecast_cell("Group 1st"),
+      group_second = forecast_cell("Group 2nd")
+    ),
+    defaultColDef = colDef(
+      minWidth = 50
     )
   )
 }
