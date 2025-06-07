@@ -118,10 +118,10 @@ for (i in g1_teams) {
     for (j in setdiff(g1_teams, i)) {
       for (l in setdiff(g2_teams, k)) {
         p <- G[i, j] * G[k, l]
-        Q[i, j] <- Q[i, j] + p * (P_knockout[i, k] * P_knockout[j, l])
-        Q[i, l] <- Q[i, l] + p * (P_knockout[i, k] * P_knockout[l, j])
-        Q[k, j] <- Q[k, j] + p * (P_knockout[k, i] * P_knockout[j, l])
-        Q[k, l] <- Q[k, l] + p * (P_knockout[k, i] * P_knockout[l, j])
+        Q[i, j] <- Q[i, j] + p * (P_knockout[i, l] * P_knockout[j, k])
+        Q[i, k] <- Q[i, k] + p * (P_knockout[i, l] * P_knockout[k, j])
+        Q[l, j] <- Q[l, j] + p * (P_knockout[l, i] * P_knockout[j, k])
+        Q[l, k] <- Q[l, k] + p * (P_knockout[l, i] * P_knockout[k, j])
       }
     }
   }
@@ -135,10 +135,10 @@ for (i in g3_teams) {
     for (j in setdiff(g3_teams, i)) {
       for (l in setdiff(g4_teams, j)) {
         p <- G[i, j] * G[k, l]
-        Q[i, j] <- Q[i, j] + p * (P_knockout[i, k] * P_knockout[j, l])
-        Q[i, l] <- Q[i, l] + p * (P_knockout[i, k] * P_knockout[l, j])
-        Q[k, j] <- Q[k, j] + p * (P_knockout[k, i] * P_knockout[j, l])
-        Q[k, l] <- Q[k, l] + p * (P_knockout[k, i] * P_knockout[l, j])
+        Q[i, j] <- Q[i, j] + p * (P_knockout[i, l] * P_knockout[j, k])
+        Q[i, k] <- Q[i, k] + p * (P_knockout[i, l] * P_knockout[k, j])
+        Q[l, j] <- Q[l, j] + p * (P_knockout[l, i] * P_knockout[j, k])
+        Q[l, k] <- Q[l, k] + p * (P_knockout[l, i] * P_knockout[k, j])
       }
     }
   }
@@ -151,14 +151,18 @@ s2_teams <- unlist(group_teams[3:4])
 
 for (i in s1_teams) {
   for (j in s1_teams) {
-    SF[i] <- SF[i] + Q[i, j] * P_knockout[i, j]
-    SF[j] <- SF[j] + Q[i, j] * P_knockout[j, i]
+    if (i != j) {
+      SF[i] <- SF[i] + Q[i, j] * P_knockout[i, j]
+      SF[j] <- SF[j] + Q[i, j] * P_knockout[j, i]
+    }
   }
 }
 for (i in s2_teams) {
   for (j in s2_teams) {
-    SF[i] <- SF[i] + Q[i, j] * P_knockout[i, j]
-    SF[j] <- SF[j] + Q[i, j] * P_knockout[j, i]
+    if (i != j) {
+      SF[i] <- SF[i] + Q[i, j] * P_knockout[i, j]
+      SF[j] <- SF[j] + Q[i, j] * P_knockout[j, i]
+    }
   }
 }
 
@@ -170,15 +174,15 @@ for (i in s1_teams) {
   }
 }
 
-WF
 
-tibble(
+res <- tibble(
   team = rank_tbl_grp$name,
   winner = 100 * WF,
   final = 100 * SF,
-  semi = 100 * rowSums(Q),
+  semi = 100 * (rowSums(Q) + colSums(Q)),
   quarter = 100 * (rowSums(G) + colSums(G)),
   group_first = 100 * rowSums(G),
   group_second = 100 * colSums(G)
-) |>
-  saveRDS("app/data/tournament_probabilities.rds")
+)
+res
+saveRDS(res, "app/data/tournament_probabilities.rds")
