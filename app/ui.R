@@ -207,6 +207,10 @@ ui <- page_fluid(
           )
         )
       ),
+      nav_panel(
+        "All-time Player stats",
+        value = "player_stats_tab",
+      ),
       "----",
       "Description:",
       nav_item(
