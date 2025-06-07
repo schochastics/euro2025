@@ -32,9 +32,14 @@ ui <- page_fluid(
   # ─── NAVSET_PILL: the pill navigation itself ────────────────────────────────
   navset_pill(
     id = "tab",
-
     # ───────────────────────────────────────────────────────────────────────────
-    # Panel 1: Teams (flag grid in content area)
+    nav_panel(
+      title = "Home",
+      value = "home_tab",
+      h2("Women's Euro 2025", class = "country"),
+      img(src = "logo.svg", height = "400px")
+    ),
+    # ───────────────────────────────────────────────────────────────────────────
     nav_panel(
       title = "Teams",
       value = "teams_tab",
@@ -64,7 +69,7 @@ ui <- page_fluid(
       )
     ),
 
-    # Panel 2: Placeholder
+    # ───────────────────────────────────────────────────────────────────────────
     nav_panel(
       title = "Locations",
       value = "loc_tab",
@@ -77,7 +82,7 @@ ui <- page_fluid(
       )
     ),
 
-    # Panel 3: Placeholder
+    # ───────────────────────────────────────────────────────────────────────────
     nav_panel(
       title = "Standings",
       value = "standings_tab",
@@ -119,21 +124,21 @@ ui <- page_fluid(
       )
     ),
 
-    # Panel 4: Placeholder
+    # ───────────────────────────────────────────────────────────────────────────
     nav_panel(
       title = "Predictions",
       value = "prediction_tab",
       reactableOutput("fifa_ranking", width = "100%"),
     ),
 
-    # Panel 5: Placeholder
+    # ───────────────────────────────────────────────────────────────────────────
     nav_panel(
       title = "Pill 5",
       value = "pill5_tab",
       "Content for Pill 5…"
     ),
-
-    # Example of a nav_menu at the end
+    nav_spacer(),
+    # ───────────────────────────────────────────────────────────────────────────
     nav_menu(
       title = "Other links",
       nav_panel("Panel D", "Panel D content…"),
