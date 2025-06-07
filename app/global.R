@@ -23,6 +23,25 @@ country_codes <- c(
   WAL = "Wales"
 )
 
+name_to_code <- c(
+  Belgium = "BEL",
+  Denmark = "DEN",
+  England = "ENG",
+  Spain = "ESP",
+  Finland = "FIN",
+  France = "FRA",
+  Germany = "GER",
+  Iceland = "ISL",
+  Italy = "ITA",
+  Netherlands = "NED",
+  Norway = "NOR",
+  Poland = "POL",
+  Portugal = "POR",
+  Sweden = "SWE",
+  Switzerland = "SUI",
+  Wales = "WAL"
+)
+
 # Data for map
 switzerland_sf <- readRDS("data/switzerland_sf.rds")
 hotels <- readr::read_csv("data/geocoded_hotels.csv")
@@ -44,27 +63,9 @@ logo <- makeIcon(
 
 # Data for standings table
 standings_complete <- readRDS("data/standings_complete.rds")
-fifa_rankings <- readRDS("data/fifa_rankings.rds")
+fifa_ranking <- readRDS("data/fifa_ranking.rds")
 
 make_table <- function(standings_complete, group) {
-  name_to_code <- c(
-    Belgium = "BEL",
-    Denmark = "DEN",
-    England = "ENG",
-    Spain = "ESP",
-    Finland = "FIN",
-    France = "FRA",
-    Germany = "GER",
-    Iceland = "ISL",
-    Italy = "ITA",
-    Netherlands = "NED",
-    Norway = "NOR",
-    Poland = "POL",
-    Portugal = "POR",
-    Sweden = "SWE",
-    Switzerland = "SUI",
-    Wales = "WAL"
-  )
   standings_complete |>
     dplyr::filter(Group == group) |>
     select(-Group) |>
@@ -120,5 +121,45 @@ make_table <- function(standings_complete, group) {
           NULL
         }
       }
+    )
+}
+
+make_fifa <- function(fifa_ranking) {
+  fifa_ranking |>
+    mutate(group = LETTERS[group]) |>
+    arrange(rank) |>
+    reactable(
+      columns = list(
+        name = colDef(
+          minWidth = 100,
+          name = "Country",
+          html = TRUE,
+          cell = function(value) {
+            code <- name_to_code[[value]]
+            if (is.null(code)) return(value)
+            img_tag <- img(
+              src = sprintf(
+                "flags/%s.png",
+                code
+              ),
+              style = "height: 20px; margin-right: 8px;",
+              alt = code
+            )
+            tagList(
+              div(
+                style = "display: inline-flex; align-items: center;",
+                img_tag,
+                value
+              )
+            )
+          }
+        ),
+        rank = colDef(name = "Global Rank", align = "center"),
+        totalPoints = colDef(name = "Points", align = "center"),
+        group = colDef(name = "Group", align = "center")
+      ),
+      defaultPageSize = 16,
+      striped = TRUE,
+      highlight = TRUE
     )
 }

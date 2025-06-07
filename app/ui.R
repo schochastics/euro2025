@@ -123,7 +123,7 @@ ui <- page_fluid(
     nav_panel(
       title = "Predictions",
       value = "prediction_tab",
-      "Content for Pill 4…"
+      reactableOutput("fifa_ranking", width = "100%"),
     ),
 
     # Panel 5: Placeholder

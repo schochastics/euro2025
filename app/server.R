@@ -137,18 +137,6 @@ server <- function(input, output) {
   })
 
   output$fifa_ranking <- renderReactable({
-    fifa_ranking |>
-      arrange(rank) |>
-      reactable(
-        columns = list(
-          name = colDef(name = "Country"),
-          rank = colDef(name = "Rank", align = "center"),
-          points = colDef(name = "Points", align = "center"),
-          group = colDef(name = "Group", align = "center")
-        ),
-        defaultPageSize = 16,
-        striped = TRUE,
-        highlight = TRUE
-      )
+    make_fifa(fifa_ranking)
   })
 }
