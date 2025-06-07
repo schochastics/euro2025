@@ -72,7 +72,7 @@ make_table <- function(standings_complete, group) {
     reactable(
       columns = list(
         Team = colDef(
-          minWidth = 100,
+          minWidth = 80,
           name = "",
           html = TRUE,
           cell = function(value) {
@@ -101,7 +101,7 @@ make_table <- function(standings_complete, group) {
         Lost = colDef(name = "Lost"),
         For = colDef(name = "For"),
         Against = colDef(name = "Against"),
-        GoalDifference = colDef(name = "Goal Difference"),
+        GoalDifference = colDef(name = "Diff."),
         Points = colDef(name = "Points", style = list(fontWeight = "bold"))
       ),
       bordered = FALSE,
