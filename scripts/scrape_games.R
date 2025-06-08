@@ -83,7 +83,7 @@ games <- purrr::map(raw, function(x) {
 
 most_titles <- tibble(
   country = c("Germany", "Norway", "Sweden", "England", "Netherlands"),
-  titles = c(8, 2, 1, 1, 1)
+  n = c(8, 2, 1, 1, 1)
 )
 
 matches_played <- games |>
@@ -97,11 +97,11 @@ matches_played <- games |>
 
 matches_won <- games |>
   dplyr::filter(winner != "Draw") |>
-  count(winner, sort = TRUE)
+  count(country = winner, sort = TRUE)
 
 matches_lost <- games |>
   dplyr::filter(winner != "Draw") |>
-  count(looser, sort = TRUE)
+  count(country = looser, sort = TRUE)
 
 matches_drawn <- games |>
   dplyr::filter(winner == "Draw") |>
@@ -121,8 +121,8 @@ goals_scored <- games |>
   ) |>
   mutate(score = if_else(match_type == "home_team", home_score, away_score)) |>
   group_by(country) |>
-  summarise(goals = sum(score), .groups = "drop") |>
-  arrange(desc(goals))
+  summarise(n = sum(score), .groups = "drop") |>
+  arrange(desc(n))
 
 goals_conceded <- games |>
   select(home_team, away_team, home_score, away_score) |>
@@ -133,8 +133,8 @@ goals_conceded <- games |>
   ) |>
   mutate(score = if_else(match_type == "home_team", away_score, home_score)) |>
   group_by(country) |>
-  summarise(goals = sum(score), .groups = "drop") |>
-  arrange(desc(goals))
+  summarise(n = sum(score), .groups = "drop") |>
+  arrange(desc(n))
 
 
 list(

@@ -245,7 +245,34 @@ ui <- page_fluid(
           column(1), # Left spacer
           column(
             10,
-            # reactableOutput("fixtures_table", width = "100%")
+            fluidRow(
+              column(
+                6,
+                reactableOutput("most_titles", width = "100%")
+              ),
+              column(
+                6,
+                reactableOutput("matches_played", width = "100%")
+              ),
+            ),
+            fluidRow(
+              column(
+                3,
+                reactableOutput("matches_won", width = "100%")
+              ),
+              column(
+                3,
+                reactableOutput("matches_drawn", width = "100%")
+              ),
+              column(
+                3,
+                reactableOutput("matches_lost", width = "100%")
+              ),
+              column(
+                3,
+                reactableOutput("goals_scored", width = "100%")
+              )
+            ),
           ),
           column(1) # Right spacer
         )

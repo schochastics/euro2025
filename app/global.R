@@ -59,6 +59,7 @@ forecast <- readRDS("data/tournament_probabilities.rds")
 games <- readRDS("data/games.rds")
 player_appearance <- readRDS("data/all_time_appearance.rds")
 player_scorer <- readRDS("data/all_time_scorer.rds")
+tournament_summary <- readRDS("data/tournament_summary.rds")
 
 hotels$flag_url <- paste0("https://flagcdn.com/w20/", hotels$iso2, ".png")
 
@@ -294,5 +295,45 @@ make_simple_table <- function(df, ...) {
     filterable = TRUE,
     highlight = TRUE,
     ...
+  )
+}
+
+make_cup_summary <- function(data, name) {
+  reactable(
+    data,
+    columns = list(
+      country = country_cell(name = name),
+      n = colDef(
+        name = "",
+        cell = function(value, index) {
+          style <- if (index == 1) {
+            "font-size: 1.2em;" # Slightly larger
+          } else {
+            NULL
+          }
+          div(style = style, value)
+        }
+      )
+    ),
+    rowStyle = function(index) {
+      if (index == 1) {
+        list(color = "white", background = "#211431")
+      } else {
+        NULL
+      }
+    },
+    theme = reactableTheme(
+      tableStyle = list(
+        border = "2px solid #ccc", # Stroke around the table
+        borderRadius = "10px", # Rounded corners
+        overflow = "hidden" # Ensures rounding is visible
+      ),
+      headerStyle = list(
+        background = "#211431",
+        color = "white",
+        borderBottom = "none"
+      )
+    ),
+    defaultPageSize = 5
   )
 }

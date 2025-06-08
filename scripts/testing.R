@@ -4,9 +4,9 @@ tibble(
 ) |>
   reactable(
     columns = list(
-      country = colDef(name = "Country"),
+      country = colDef(name = "Most Titles"),
       value = colDef(
-        name = "Value",
+        name = "",
         cell = function(value, index) {
           style <- if (index == 1) {
             "font-size: 1.2em;" # Slightly larger

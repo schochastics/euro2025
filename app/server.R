@@ -177,4 +177,26 @@ server <- function(input, output) {
   output$all_time_scorer <- renderReactable({
     make_simple_table(player_scorer)
   })
+
+  output$most_titles <- renderReactable({
+    make_cup_summary(tournament_summary$most_titles, "Most Titles")
+  })
+  output$matches_played <- renderReactable({
+    make_cup_summary(tournament_summary$matches_played, "Matches Played")
+  })
+  output$matches_won <- renderReactable({
+    make_cup_summary(tournament_summary$matches_won, "Matches Won")
+  })
+  output$matches_lost <- renderReactable({
+    make_cup_summary(tournament_summary$matches_lost, "Matches Lost")
+  })
+  output$matches_drawn <- renderReactable({
+    make_cup_summary(tournament_summary$matches_drawn, "Matches Drawn")
+  })
+  output$goals_scored <- renderReactable({
+    make_cup_summary(tournament_summary$goals_scored, "Goals Scored")
+  })
+  output$goals_conceded <- renderReactable({
+    make_cup_summary(tournament_summary$goals_conceded, "Goals Conceded")
+  })
 }
