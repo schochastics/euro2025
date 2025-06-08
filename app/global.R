@@ -103,6 +103,23 @@ country_cell <- function(...) {
     ...
   )
 }
+
+rounded_theme <- function(...) {
+  reactableTheme(
+    tableStyle = list(
+      border = "2px solid #ccc",
+      borderRadius = "10px",
+      overflow = "hidden"
+    ),
+    headerStyle = list(
+      background = "#211431",
+      color = "white",
+      borderBottom = "none"
+    ),
+    ...
+  )
+}
+
 make_table <- function(standings_complete, group) {
   standings_complete |>
     dplyr::filter(Group == group) |>
@@ -135,7 +152,8 @@ make_table <- function(standings_complete, group) {
         } else {
           NULL
         }
-      }
+      },
+      theme = rounded_theme()
     )
 }
 
@@ -154,6 +172,7 @@ make_fifa <- function(fifa_ranking) {
         ),
         group = colDef(name = "Group", align = "center")
       ),
+      theme = rounded_theme(),
       defaultPageSize = 16,
       striped = FALSE,
       highlight = TRUE
@@ -188,6 +207,7 @@ make_forecast <- function(df) {
     defaultColDef = colDef(
       minWidth = 50
     ),
+    theme = rounded_theme(),
     highlight = TRUE
   )
 }
