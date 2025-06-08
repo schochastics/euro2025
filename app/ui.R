@@ -36,7 +36,7 @@ ui <- page_fluid(
     nav_panel(
       title = "Home",
       value = "home_tab",
-      h2("Women's Euro 2025", class = "country"),
+      h2("Women's Euro 2025", class = "header"),
       img(src = "logo.svg", height = "400px")
     ),
     # ───────────────────────────────────────────────────────────────────────────
@@ -74,19 +74,15 @@ ui <- page_fluid(
     nav_panel(
       title = "Locations",
       value = "loc_tab",
-      card(
-        card_header(
-          class = "bg-purple",
-          "Stadiums and Team Hotels"
-        ),
-        leafletOutput("map", height = "600px", width = "100%")
-      )
+      h2("Hotels and Stadiums", class = "header"),
+      leafletOutput("map", height = "600px", width = "100%")
     ),
 
     # ───────────────────────────────────────────────────────────────────────────
     nav_panel(
       title = "Standings",
       value = "standings_tab",
+      h2("Group Standings", class = "header"),
       fluidRow(
         column(
           width = 6,
@@ -129,6 +125,7 @@ ui <- page_fluid(
     nav_panel(
       title = "Predictions",
       value = "prediction_tab",
+      h2("FIFA Ranking and Win Probabilities", class = "header"),
       fluidRow(
         column(
           width = 6,
@@ -163,7 +160,7 @@ ui <- page_fluid(
         "Head-to_head",
         value = "head_to_head_tab",
         fluidPage(
-          titlePanel("Head-to-Head Comparison"),
+          h2("Head-to-Head Comparison", class = "header"),
 
           fluidRow(
             column(1),
@@ -209,8 +206,22 @@ ui <- page_fluid(
         )
       ),
       nav_panel(
+        "All-time Tournament Stats",
+        value = "tournament_tab",
+        h2("All-time Tournament Statistics", class = "header"),
+        fluidRow(
+          column(1), # Left spacer
+          column(
+            10,
+            # reactableOutput("fixtures_table", width = "100%")
+          ),
+          column(1) # Right spacer
+        )
+      ),
+      nav_panel(
         "All-time Player stats",
         value = "player_stats_tab",
+        h2("All-time Player Statistics", class = "header"),
         fluidRow(
           column(1), # Left spacer
           column(
