@@ -5,53 +5,10 @@ library(shiny)
 server <- function(input, output) {
   v <- reactiveValues(country = "Belgium")
 
-  observeEvent(input$be, {
-    v$country <- "Belgium"
-  })
-  observeEvent(input$dk, {
-    v$country <- "Denmark"
-  })
-  observeEvent(input$`gb-eng`, {
-    v$country <- "England"
-  })
-  observeEvent(input$es, {
-    v$country <- "Spain"
-  })
-  observeEvent(input$fi, {
-    v$country <- "Finland"
-  })
-  observeEvent(input$fr, {
-    v$country <- "France"
-  })
-  observeEvent(input$de, {
-    v$country <- "Germany"
-  })
-  observeEvent(input$is, {
-    v$country <- "Iceland"
-  })
-  observeEvent(input$it, {
-    v$country <- "Italy"
-  })
-  observeEvent(input$nl, {
-    v$country <- "Netherlands"
-  })
-  observeEvent(input$no, {
-    v$country <- "Norway"
-  })
-  observeEvent(input$pl, {
-    v$country <- "Poland"
-  })
-  observeEvent(input$pt, {
-    v$country <- "Portugal"
-  })
-  observeEvent(input$se, {
-    v$country <- "Sweden"
-  })
-  observeEvent(input$ch, {
-    v$country <- "Switzerland"
-  })
-  observeEvent(input$`gb-wls`, {
-    v$country <- "Wales"
+  lapply(names(country_map), function(id) {
+    observeEvent(input[[id]], {
+      v$country <- country_map[[id]]
+    })
   })
 
   output$country_ui <- renderUI({

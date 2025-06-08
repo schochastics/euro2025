@@ -27,6 +27,25 @@ countries <- c(
   "Wales"
 )
 
+country_map <- c(
+  be = "Belgium",
+  dk = "Denmark",
+  `gb-eng` = "England",
+  es = "Spain",
+  fi = "Finland",
+  fr = "France",
+  de = "Germany",
+  is = "Iceland",
+  it = "Italy",
+  nl = "Netherlands",
+  no = "Norway",
+  pl = "Poland",
+  pt = "Portugal",
+  se = "Sweden",
+  ch = "Switzerland",
+  `gb-wls` = "Wales"
+)
+
 # Data for map
 switzerland_sf <- readRDS("data/switzerland_sf.rds")
 hotels <- readr::read_csv("data/geocoded_hotels.csv")
@@ -62,7 +81,9 @@ country_cell <- function(...) {
     html = TRUE,
     cell = function(value) {
       code <- flags$iso2[flags$country == value]
-      if (is.null(code)) return(value)
+      if (is.null(code)) {
+        return(value)
+      }
       img_tag <- img(
         src = sprintf(
           "flags/%s.svg",

@@ -172,8 +172,8 @@ ui <- page_fluid(
                 selectInput(
                   "country1",
                   "Select Country 1:",
-                  choices = unname(country_codes),
-                  selected = unname(country_codes[1])
+                  choices = countries,
+                  selected = countries[1]
                 ),
                 uiOutput("flag1")
               )
@@ -195,8 +195,8 @@ ui <- page_fluid(
                 selectInput(
                   "country2",
                   "Select Country 2:",
-                  choices = unname(country_codes),
-                  selected = unname(country_codes[2])
+                  choices = countries,
+                  selected = countries[2]
                 ),
                 uiOutput("flag2")
               )
