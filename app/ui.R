@@ -37,8 +37,15 @@ ui <- page_fluid(
     nav_panel(
       title = "Home",
       value = "home_tab",
-      h2("Women's Euro 2025", class = "header"),
-      img(src = "logo.svg", height = "400px")
+      fluidRow(
+        column(2),
+        column(
+          8,
+          offset = 2,
+          img(src = "logo.svg", height = "600px")
+        ),
+        column(2)
+      )
     ),
     # ───────────────────────────────────────────────────────────────────────────
     nav_panel(
