@@ -8,49 +8,31 @@ prob_col <- function(x) {
   rgb(get_color(x), maxColorValue = 255)
 }
 
-# Define country codes and names for the flags
-country_codes <- c(
-  BEL = "Belgium",
-  DEN = "Denmark",
-  ENG = "England",
-  ESP = "Spain",
-  FIN = "Finland",
-  FRA = "France",
-  GER = "Germany",
-  ISL = "Iceland",
-  ITA = "Italy",
-  NED = "Netherlands",
-  NOR = "Norway",
-  POL = "Poland",
-  POR = "Portugal",
-  SWE = "Sweden",
-  SUI = "Switzerland",
-  WAL = "Wales"
-)
-
-name_to_code <- c(
-  Belgium = "BEL",
-  Denmark = "DEN",
-  England = "ENG",
-  Spain = "ESP",
-  Finland = "FIN",
-  France = "FRA",
-  Germany = "GER",
-  Iceland = "ISL",
-  Italy = "ITA",
-  Netherlands = "NED",
-  Norway = "NOR",
-  Poland = "POL",
-  Portugal = "POR",
-  Sweden = "SWE",
-  Switzerland = "SUI",
-  Wales = "WAL"
+countries <- c(
+  "Belgium",
+  "Denmark",
+  "England",
+  "Spain",
+  "Finland",
+  "France",
+  "Germany",
+  "Iceland",
+  "Italy",
+  "Netherlands",
+  "Norway",
+  "Poland",
+  "Portugal",
+  "Sweden",
+  "Switzerland",
+  "Wales"
 )
 
 # Data for map
 switzerland_sf <- readRDS("data/switzerland_sf.rds")
 hotels <- readr::read_csv("data/geocoded_hotels.csv")
 stadiums <- readr::read_csv("data/stadiums.csv")
+flags <- readRDS("data/flags.rds")
+
 # Data for standings table
 standings_complete <- readRDS("data/standings_complete.rds")
 fifa_ranking <- readRDS("data/fifa_ranking.rds")
@@ -79,11 +61,11 @@ country_cell <- function(...) {
     name = "",
     html = TRUE,
     cell = function(value) {
-      code <- name_to_code[[value]]
+      code <- flags$iso2[flags$country == value]
       if (is.null(code)) return(value)
       img_tag <- img(
         src = sprintf(
-          "flags/%s.png",
+          "flags/%s.svg",
           code
         ),
         style = "height: 20px; margin-right: 8px;",

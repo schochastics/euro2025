@@ -49,15 +49,16 @@ ui <- page_fluid(
           width = 200,
           tags$div(
             class = "flag-grid",
-            lapply(names(country_codes), function(ccode) {
+            lapply(countries, function(ctr) {
+              ccode <- flags$iso2[flags$country == ctr]
               actionButton(
                 inputId = ccode,
                 label = HTML(
                   paste0(
                     "<img src='flags/",
                     ccode,
-                    ".png' alt='",
-                    country_codes[ccode],
+                    ".svg' alt='",
+                    ctr,
                     "' height = '40px'/>"
                   )
                 ),

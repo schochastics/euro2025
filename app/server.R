@@ -5,52 +5,52 @@ library(shiny)
 server <- function(input, output) {
   v <- reactiveValues(country = "Belgium")
 
-  observeEvent(input$BEL, {
+  observeEvent(input$be, {
     v$country <- "Belgium"
   })
-  observeEvent(input$DEN, {
+  observeEvent(input$dk, {
     v$country <- "Denmark"
   })
-  observeEvent(input$ENG, {
+  observeEvent(input$`gb-eng`, {
     v$country <- "England"
   })
-  observeEvent(input$ESP, {
+  observeEvent(input$es, {
     v$country <- "Spain"
   })
-  observeEvent(input$FIN, {
+  observeEvent(input$fi, {
     v$country <- "Finland"
   })
-  observeEvent(input$FRA, {
+  observeEvent(input$fr, {
     v$country <- "France"
   })
-  observeEvent(input$GER, {
+  observeEvent(input$de, {
     v$country <- "Germany"
   })
-  observeEvent(input$ISL, {
+  observeEvent(input$is, {
     v$country <- "Iceland"
   })
-  observeEvent(input$ITA, {
+  observeEvent(input$it, {
     v$country <- "Italy"
   })
-  observeEvent(input$NED, {
+  observeEvent(input$nl, {
     v$country <- "Netherlands"
   })
-  observeEvent(input$NOR, {
+  observeEvent(input$no, {
     v$country <- "Norway"
   })
-  observeEvent(input$POL, {
+  observeEvent(input$pl, {
     v$country <- "Poland"
   })
-  observeEvent(input$POR, {
+  observeEvent(input$pt, {
     v$country <- "Portugal"
   })
-  observeEvent(input$SWE, {
+  observeEvent(input$se, {
     v$country <- "Sweden"
   })
-  observeEvent(input$SUI, {
+  observeEvent(input$ch, {
     v$country <- "Switzerland"
   })
-  observeEvent(input$WAL, {
+  observeEvent(input$`gb-wls`, {
     v$country <- "Wales"
   })
 
@@ -145,13 +145,13 @@ server <- function(input, output) {
   })
 
   output$flag1 <- renderUI({
-    code <- names(country_codes)[country_codes == input$country1]
-    img(src = paste0("flags/", code, ".png"), height = "100px")
+    code <- flags$iso2[flags$country == input$country1]
+    img(src = paste0("flags/", code, ".svg"), height = "100px")
   })
 
   output$flag2 <- renderUI({
-    code <- names(country_codes)[country_codes == input$country2]
-    img(src = paste0("flags/", code, ".png"), height = "100px")
+    code <- flags$iso2[flags$country == input$country2]
+    img(src = paste0("flags/", code, ".svg"), height = "100px")
   })
 
   observeEvent(c(input$country1, input$country2), {
