@@ -68,7 +68,7 @@ country_cell <- function(...) {
           "flags/%s.svg",
           code
         ),
-        style = "height: 20px; margin-right: 8px;",
+        class = "flag-table",
         alt = code
       )
       tagList(
@@ -173,6 +173,9 @@ make_forecast <- function(df) {
 make_simple_table <- function(df, ...) {
   reactable(
     df,
+    columns = list(
+      Country = country_cell()
+    ),
     defaultPageSize = 25,
     searchable = FALSE,
     filterable = TRUE,

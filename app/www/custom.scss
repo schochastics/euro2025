@@ -43,6 +43,25 @@
   justify-content: center;
 }
 
+.flag-grid .btn-flag img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid black
+}
+
+.flag-table {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid black;
+  margin-right: 8px;
+}
+
 /* Disable any hover/focus highlight on .btn-flag */
 .flag-grid .btn-flag:hover,
 .flag-grid .btn-flag:focus {
