@@ -12,7 +12,8 @@ my_theme <- bs_theme(
   fg = "black",
   primary = "#ff9e33",
   secondary = "red",
-  base_font = font_google("Saira"),
+  base_font = font_google("Roboto"),
+  heading_font = font_google("Saira"),
   # code_font = font_google("Press Start 2P"),
   "font-size-base" = "0.75rem",
   "enable-rounded" = FALSE
@@ -88,6 +89,12 @@ ui <- page_fluid(
           width = 6,
           div(
             h2("Group A", class = "country"),
+            tags$details(
+              tags$summary(strong("Show Schedule")),
+              div(
+                reactableOutput("scheduleA", width = "100%")
+              )
+            ),
             reactableOutput("tableA", width = "100%"),
             class = "table-container",
           )
@@ -96,6 +103,12 @@ ui <- page_fluid(
           width = 6,
           div(
             h2("Group B", class = "country"),
+            tags$details(
+              tags$summary(strong("Show Schedule")),
+              div(
+                reactableOutput("scheduleB", width = "100%")
+              )
+            ),
             reactableOutput("tableB", width = "100%"),
             class = "table-container",
           )
@@ -106,6 +119,12 @@ ui <- page_fluid(
           width = 6,
           div(
             h2("Group C", class = "country"),
+            tags$details(
+              tags$summary(strong("Show Schedule")),
+              div(
+                reactableOutput("scheduleC", width = "100%")
+              )
+            ),
             reactableOutput("tableC", width = "100%"),
             class = "table-container",
           )
@@ -114,6 +133,12 @@ ui <- page_fluid(
           width = 6,
           div(
             h2("Group D", class = "country"),
+            tags$details(
+              tags$summary(strong("Show Schedule")),
+              div(
+                reactableOutput("scheduleD", width = "100%")
+              )
+            ),
             reactableOutput("tableD", width = "100%"),
             class = "table-container",
           )

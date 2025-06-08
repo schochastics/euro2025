@@ -52,7 +52,21 @@ server <- function(input, output) {
   output$tableD <- renderReactable({
     make_table(standings_complete, "D")
   })
+  output$scheduleA <- renderReactable({
+    make_schedule(schedule, "A")
+  })
 
+  output$scheduleB <- renderReactable({
+    make_schedule(schedule, "B")
+  })
+
+  output$scheduleC <- renderReactable({
+    make_schedule(schedule, "C")
+  })
+
+  output$scheduleD <- renderReactable({
+    make_schedule(schedule, "D")
+  })
   output$fifa_ranking <- renderReactable({
     make_fifa(fifa_ranking)
   })

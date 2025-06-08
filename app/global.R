@@ -118,10 +118,10 @@ swiss_map <- function() {
     )
 }
 
-country_cell <- function(...) {
+country_cell <- function(name = "", ...) {
   colDef(
     minWidth = 100,
-    name = "",
+    name = name,
     html = TRUE,
     cell = function(value) {
       code <- flags$iso2[flags$country == value]
@@ -162,6 +162,33 @@ rounded_theme <- function(...) {
     ),
     ...
   )
+}
+
+make_schedule <- function(schedule, group) {
+  schedule |>
+    dplyr::filter(Group == group) |>
+    select(-Group) |>
+    mutate(Result = ifelse(Result == "-:-", Time, Result)) |>
+    select(-Time) |>
+    reactable(
+      columns = list(
+        Date = colDef(name = "Date"),
+        HomeTeam = country_cell(name = ""),
+        AwayTeam = country_cell(name = ""),
+        Result = colDef(name = "Result", align = "center")
+      ),
+      bordered = FALSE,
+      highlight = TRUE,
+      striped = FALSE,
+      fullWidth = TRUE,
+      style = list(border = "none"),
+      defaultColDef = colDef(
+        minWidth = 100,
+        style = list(borderRight = "none"),
+        headerStyle = list(fontWeight = "normal")
+      ),
+      theme = rounded_theme()
+    )
 }
 
 make_table <- function(standings_complete, group) {

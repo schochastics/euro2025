@@ -107,3 +107,4 @@ standings_complete <- teams |>
   arrange(Group, desc(Points), desc(GoalDifference), desc(For))
 
 saveRDS(standings_complete, "app/data/standings_complete.rds")
+saveRDS(schedule, "app/data/schedule.rds")
