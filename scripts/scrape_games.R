@@ -72,6 +72,7 @@ games <- purrr::map(raw, function(x) {
   bind_rows() |>
   dplyr::filter(result != "-:-") |>
   mutate(
+    pre_pso_score = str_remove_all(pre_pso_score, "\\s+aet"),
     home_score = as.integer(str_extract(pre_pso_score, "^\\d+")),
     away_score = as.integer(str_extract(pre_pso_score, "\\d+$")),
     hw = as.integer(str_extract(final_score, "^\\d+")),
@@ -79,3 +80,71 @@ games <- purrr::map(raw, function(x) {
     winner = if_else(hw > aw, home_team, if_else(hw < aw, away_team, "Draw")),
     looser = if_else(hw > aw, away_team, if_else(hw < aw, home_team, "Draw")),
   )
+
+most_titles <- tibble(
+  country = c("Germany", "Norway", "Sweden", "England", "Netherlands"),
+  titles = c(8, 2, 1, 1, 1)
+)
+
+matches_played <- games |>
+  select(home_team, away_team) |>
+  pivot_longer(
+    cols = c("home_team", "away_team"),
+    names_to = "match_type",
+    values_to = "country"
+  ) |>
+  count(country, sort = TRUE)
+
+matches_won <- games |>
+  dplyr::filter(winner != "Draw") |>
+  count(winner, sort = TRUE)
+
+matches_lost <- games |>
+  dplyr::filter(winner != "Draw") |>
+  count(looser, sort = TRUE)
+
+matches_drawn <- games |>
+  dplyr::filter(winner == "Draw") |>
+  pivot_longer(
+    cols = c("home_team", "away_team"),
+    names_to = "match_type",
+    values_to = "country"
+  ) |>
+  count(country, sort = TRUE)
+
+goals_scored <- games |>
+  select(home_team, away_team, home_score, away_score) |>
+  pivot_longer(
+    cols = c("home_team", "away_team"),
+    names_to = "match_type",
+    values_to = "country"
+  ) |>
+  mutate(score = if_else(match_type == "home_team", home_score, away_score)) |>
+  group_by(country) |>
+  summarise(goals = sum(score), .groups = "drop") |>
+  arrange(desc(goals))
+
+goals_conceded <- games |>
+  select(home_team, away_team, home_score, away_score) |>
+  pivot_longer(
+    cols = c("home_team", "away_team"),
+    names_to = "match_type",
+    values_to = "country"
+  ) |>
+  mutate(score = if_else(match_type == "home_team", away_score, home_score)) |>
+  group_by(country) |>
+  summarise(goals = sum(score), .groups = "drop") |>
+  arrange(desc(goals))
+
+
+list(
+  games = games,
+  most_titles = most_titles,
+  matches_played = matches_played,
+  matches_won = matches_won,
+  matches_lost = matches_lost,
+  matches_drawn = matches_drawn,
+  goals_scored = goals_scored,
+  goals_conceded = goals_conceded
+) |>
+  saveRDS("app/data/tournament_summary.rds")
