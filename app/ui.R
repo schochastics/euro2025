@@ -8,7 +8,7 @@ library(bslib)
 # ───────────────────────────────────────────────────────────────────────────────
 
 my_theme <- bs_theme(
-  bg = "white",
+  bg = "#F3F3F3",
   fg = "black",
   primary = "#ff9e33",
   secondary = "red",
