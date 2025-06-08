@@ -166,7 +166,8 @@ make_forecast <- function(df) {
     ),
     defaultColDef = colDef(
       minWidth = 50
-    )
+    ),
+    highlight = TRUE
   )
 }
 
