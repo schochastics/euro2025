@@ -12,7 +12,7 @@ my_theme <- bs_theme(
   fg = "black",
   primary = "#ff9e33",
   secondary = "red",
-  # base_font = font_google("Press Start 2P"),
+  base_font = font_google("Saira"),
   # code_font = font_google("Press Start 2P"),
   "font-size-base" = "0.75rem",
   "enable-rounded" = FALSE
