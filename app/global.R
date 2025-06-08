@@ -74,6 +74,50 @@ logo <- makeIcon(
   iconHeight = 36 / 2
 )
 
+swiss_map <- function() {
+  leaflet(data = switzerland_sf) |>
+    addTiles() |>
+    addMarkers(
+      data = stadiums,
+      lng = ~Longitude,
+      lat = ~Latitude,
+      popup = ~ paste(
+        "<strong>Stadium:</strong>",
+        Name,
+        "<br>",
+        "<strong>City:</strong>",
+        City,
+        "<br>",
+        "<strong>Capacity:</strong>",
+        Capacity
+      ),
+      icon = logo
+    ) |>
+    addMarkers(
+      data = hotels,
+      lng = ~longitude,
+      lat = ~latitude,
+      popup = ~ paste(
+        "<strong>Country:</strong>",
+        Land,
+        "<br>",
+        "<strong>Hotel:</strong>",
+        Hotel,
+        "<br>",
+        "<strong>City:</strong>",
+        HotelCity
+      ),
+      icon = flag_icons
+    ) |>
+    setView(lng = 8.2275, lat = 46.8182, zoom = 8) |>
+    addPolygons(
+      color = "#444444",
+      weight = 1,
+      fillColor = "#ff9e33",
+      fillOpacity = 0.25
+    )
+}
+
 country_cell <- function(...) {
   colDef(
     minWidth = 100,
