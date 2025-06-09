@@ -308,9 +308,10 @@ ui <- page_fluid(
       "----",
       nav_item(
         a(
-          "GitHub",
           href = "https://github.com/schochastics/euro2025",
-          target = "_blank"
+          target = "_blank",
+          icon("github", class = "me-1"),
+          "GitHub"
         )
       )
     ) # end nav_menu()
