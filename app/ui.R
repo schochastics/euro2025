@@ -310,6 +310,14 @@ ui <- page_fluid(
           icon("github", class = "me-1"),
           "GitHub"
         )
+      ),
+      nav_item(
+        a(
+          href = "https://worldclubratings.net/",
+          target = "_blank",
+          icon("futbol", class = "me-1"),
+          "worldclubratings.net"
+        )
       )
     ) # end nav_menu()
   ) # end navset_pill()
