@@ -77,15 +77,6 @@ ui <- page_fluid(
         )
       )
     ),
-
-    # ───────────────────────────────────────────────────────────────────────────
-    nav_panel(
-      title = "Locations",
-      value = "loc_tab",
-      h2("Hotels and Stadiums", class = "header"),
-      leafletOutput("map", height = "600px", width = "100%")
-    ),
-
     # ───────────────────────────────────────────────────────────────────────────
     nav_panel(
       title = "Standings",
@@ -177,7 +168,13 @@ ui <- page_fluid(
         )
       )
     ),
-
+    # ───────────────────────────────────────────────────────────────────────────
+    nav_panel(
+      title = "Locations",
+      value = "loc_tab",
+      h2("Hotels and Stadiums", class = "header"),
+      leafletOutput("map", height = "600px", width = "100%")
+    ),
     # ───────────────────────────────────────────────────────────────────────────
     nav_panel(
       title = "Pill 5",
