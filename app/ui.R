@@ -247,19 +247,19 @@ ui <- page_fluid(
             10,
             fluidRow(
               column(
-                6,
+                4,
                 reactableOutput("most_titles", width = "100%")
               ),
               column(
-                6,
+                4,
                 reactableOutput("matches_played", width = "100%")
+              ),
+              column(
+                4,
+                reactableOutput("matches_won", width = "100%")
               ),
             ),
             fluidRow(
-              column(
-                3,
-                reactableOutput("matches_won", width = "100%")
-              ),
               column(
                 3,
                 reactableOutput("matches_drawn", width = "100%")
@@ -271,6 +271,10 @@ ui <- page_fluid(
               column(
                 3,
                 reactableOutput("goals_scored", width = "100%")
+              ),
+              column(
+                3,
+                reactableOutput("goals_conceded", width = "100%")
               )
             ),
           ),
@@ -300,12 +304,7 @@ ui <- page_fluid(
           ),
           column(1) # Right spacer
         )
-      ),
-      "----",
-      "Description:",
-      nav_item(
-        a("Shiny website", href = "https://shiny.posit.co", target = "_blank")
       )
-    )
+    ) # end nav_menu()
   ) # end navset_pill()
 ) # end page_fluid()

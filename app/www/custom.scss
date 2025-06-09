@@ -27,6 +27,28 @@
   color: #000000 !important;
 }
 
+ul .dropdown-menu {
+  background-color: #372B45 !important;
+}
+
+/* dropdown items (normal state) */
+ul.dropdown-menu .dropdown-item {
+  color: #FFFFFF !important;
+  font-size: 0.9rem;
+}
+
+/* dropdown items (hover/focus) */
+ul .dropdown-menu .dropdown-item:hover,
+ul .dropdown-menu .dropdown-item:focus {
+  background-color: #211431 !important;
+  color: #ff9e33 !important;
+}
+
+ul .dropdown-header {
+  color: #FFFFFF !important;
+  font-weight: bold;
+}
+
 .flag-grid {
   display: flex;
   flex-wrap: wrap;
