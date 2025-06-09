@@ -176,11 +176,11 @@ ui <- page_fluid(
       leafletOutput("map", height = "600px", width = "100%")
     ),
     # ───────────────────────────────────────────────────────────────────────────
-    nav_panel(
-      title = "Pill 5",
-      value = "pill5_tab",
-      "Content for Pill 5…"
-    ),
+    # nav_panel(
+    #   title = "Pill 5",
+    #   value = "pill5_tab",
+    #   "Content for Pill 5…"
+    # ),
     nav_spacer(),
     # ───────────────────────────────────────────────────────────────────────────
     nav_menu(
