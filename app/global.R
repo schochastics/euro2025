@@ -61,7 +61,7 @@ games <- readRDS("data/games.rds")
 player_appearance <- readRDS("data/all_time_appearance.rds")
 player_scorer <- readRDS("data/all_time_scorer.rds")
 tournament_summary <- readRDS("data/tournament_summary.rds")
-
+schedule <- readRDS("data/schedule.rds")
 hotels$flag_url <- paste0("https://flagcdn.com/w20/", hotels$iso2, ".png")
 
 flag_icons <- makeIcon(
