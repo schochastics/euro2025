@@ -378,8 +378,14 @@ make_cup_summary <- function(data, name) {
         background = "#211431",
         color = "white",
         borderBottom = "none"
+      ),
+      paginationStyle = list(
+        backgroundColor = "#F3F3F3",
+        color = "black"
       )
     ),
-    defaultPageSize = 5
+    defaultPageSize = 5,
+    showPageInfo = FALSE,
+    paginationType = "simple"
   )
 }
