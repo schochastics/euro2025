@@ -56,6 +56,7 @@ flags <- readRDS("data/flags.rds")
 standings_complete <- readRDS("data/standings_complete.rds")
 fifa_ranking <- readRDS("data/fifa_ranking.rds")
 forecast <- readRDS("data/tournament_probabilities.rds")
+P_group <- readRDS("data/P_group.rds")
 games <- readRDS("data/games.rds")
 player_appearance <- readRDS("data/all_time_appearance.rds")
 player_scorer <- readRDS("data/all_time_scorer.rds")
@@ -168,6 +169,36 @@ rounded_theme <- function(...) {
 make_schedule <- function(schedule, group) {
   schedule |>
     dplyr::filter(Group == group) |>
+    rowwise() |>
+    mutate(
+      home_win = round(
+        100 *
+          P_group[
+            which(rownames(P_group[,, 1]) == HomeTeam),
+            which(colnames(P_group[,, 1]) == AwayTeam),
+            1
+          ],
+        2
+      ),
+      draw = round(
+        100 *
+          P_group[
+            which(rownames(P_group[,, 2]) == HomeTeam),
+            which(colnames(P_group[,, 2]) == AwayTeam),
+            2
+          ],
+        2
+      ),
+      away_win = round(
+        100 *
+          P_group[
+            which(rownames(P_group[,, 1]) == AwayTeam),
+            which(colnames(P_group[,, 1]) == HomeTeam),
+            1
+          ],
+        2
+      )
+    ) |>
     select(-Group) |>
     mutate(Result = ifelse(Result == "-:-", Time, Result)) |>
     select(-Time) |>
@@ -176,8 +207,19 @@ make_schedule <- function(schedule, group) {
         Date = colDef(name = "Date"),
         HomeTeam = country_cell(name = ""),
         AwayTeam = country_cell(name = ""),
-        Result = colDef(name = "Result", align = "center")
+        Result = colDef(name = "Result", align = "center"),
+        home_win = forecast_cell("Home Win", align = "right"),
+        draw = forecast_cell("Draw", align = "right"),
+        away_win = forecast_cell("Away Win", align = "right")
       ),
+      # ,
+      # columnGroups = list(
+      #   colGroup(
+      #     name = "Probabilities",
+      #     columns = c("home_win", "draw", "away_win"),
+      #     headerClass = "myGroupHeader",
+      #   )
+      # ),
       bordered = FALSE,
       highlight = TRUE,
       striped = FALSE,
@@ -254,6 +296,7 @@ make_fifa <- function(fifa_ranking) {
 forecast_cell <- function(name, ...) {
   colDef(
     name = name,
+    maxWidth = 80,
     format = colFormat(digits = 2),
     style = function(value) {
       txt <- ifelse(value < 45, "black", "white")
