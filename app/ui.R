@@ -304,6 +304,14 @@ ui <- page_fluid(
           ),
           column(1) # Right spacer
         )
+      ),
+      "----",
+      nav_item(
+        a(
+          "GitHub",
+          href = "https://github.com/schochastics/euro2025",
+          target = "_blank"
+        )
       )
     ) # end nav_menu()
   ) # end navset_pill()

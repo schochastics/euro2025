@@ -37,6 +37,12 @@ ul.dropdown-menu .dropdown-item {
   font-size: 0.9rem;
 }
 
+ul.dropdown-menu a {
+  color: #FFFFFF !important;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
 /* dropdown items (hover/focus) */
 ul .dropdown-menu .dropdown-item:hover,
 ul .dropdown-menu .dropdown-item:focus {
