@@ -162,6 +162,9 @@ rounded_theme <- function(...) {
       color = "white",
       borderBottom = "none"
     ),
+    style = list(
+      marginBottom = "10px"
+    ),
     ...
   )
 }
