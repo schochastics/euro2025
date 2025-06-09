@@ -189,7 +189,7 @@ ui <- page_fluid(
     nav_menu(
       title = "More",
       nav_panel(
-        "Head-to_head",
+        "Head-to-Head",
         value = "head_to_head_tab",
         fluidPage(
           h2("Head-to-Head Comparison", class = "header"),
