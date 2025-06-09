@@ -2,7 +2,7 @@ library(dplyr)
 library(reactable)
 library(htmltools)
 library(leaflet)
-
+library(sf)
 prob_col <- function(x) {
   get_color <- colorRamp(c("#ffffff", "#ff9e33"))
   rgb(get_color(x), maxColorValue = 255)
