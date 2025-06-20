@@ -53,6 +53,7 @@ ui <- page_fluid(
       value = "teams_tab",
       layout_sidebar(
         uiOutput("country_ui"),
+        reactableOutput("squads", width = "100%"),
         sidebar = sidebar(
           width = 200,
           tags$div(

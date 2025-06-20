@@ -49,4 +49,11 @@ squad_tables[[1]]
 
 # Combine all tables into one
 all_squads <- bind_rows(squad_tables)
-saveRDS(all_squads, "app/data/squads.rds")
+all_squads |>
+  mutate(
+    srt = minty::parse_number(pos),
+    pos = stringr::str_extract(pos, "[A-Z]+")
+  ) |>
+  arrange(country, srt) |>
+  select(-srt) |>
+  saveRDS("app/data/squads.rds")

@@ -32,6 +32,10 @@ server <- function(input, output) {
       "Wales" = h2("Wales", class = "country")
     )
   })
+  output$squads <- renderReactable({
+    print(v$country)
+    make_squad(squads, v$country)
+  })
 
   output$map <- renderLeaflet({
     swiss_map()

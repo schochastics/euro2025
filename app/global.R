@@ -51,6 +51,7 @@ switzerland_sf <- readRDS("data/switzerland_sf.rds")
 hotels <- readr::read_csv("data/geocoded_hotels.csv")
 stadiums <- readr::read_csv("data/stadiums.csv")
 flags <- readRDS("data/flags.rds")
+squads <- readRDS("data/squads.rds")
 
 # Data for standings table
 standings_complete <- readRDS("data/standings_complete.rds")
@@ -388,4 +389,15 @@ make_cup_summary <- function(data, name) {
     showPageInfo = FALSE,
     paginationType = "simple"
   )
+}
+
+make_squad <- function(squads, ctr) {
+  dplyr::filter(squads, country == ctr) |>
+    select(-country) |>
+    reactable(
+      defaultPageSize = 25,
+      searchable = FALSE,
+      filterable = FALSE,
+      highlight = TRUE
+    )
 }
