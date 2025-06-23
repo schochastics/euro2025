@@ -175,7 +175,7 @@ for (i in seq_len(n_teams)) {
 }
 
 
-res <- tibble(
+res <- tibble::tibble(
   team = rank_tbl_grp$name,
   winner = 100 * WF,
   final = 100 * (rowSums(SF) + colSums(SF)),
