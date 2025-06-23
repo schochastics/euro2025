@@ -155,6 +155,7 @@ ui <- page_fluid(
           width = 6,
           div(
             h2("Current FIFA Ranking", class = "country"),
+            p("as of 12 June 2025"),
             reactableOutput("fifa_ranking", width = "100%"),
             class = "table-container",
           )
@@ -163,6 +164,7 @@ ui <- page_fluid(
           width = 6,
           div(
             h2("Prediction", class = "country"),
+            selectInput("forecast_date", "Select Date:", choices = dates),
             reactableOutput("forecast", width = "100%"),
             class = "table-container",
           )

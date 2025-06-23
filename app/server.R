@@ -76,7 +76,7 @@ server <- function(input, output) {
   })
 
   output$forecast <- renderReactable({
-    make_forecast(forecast)
+    make_forecast(forecast, input$forecast_date)
   })
 
   output$flag1 <- renderUI({

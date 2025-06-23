@@ -46,6 +46,22 @@ country_map <- c(
   `gb-wls` = "Wales"
 )
 
+dates <- as.Date(c(
+  "2025-06-30",
+  "2025-07-02",
+  "2025-07-06",
+  "2025-07-10",
+  "2025-07-03",
+  "2025-07-07",
+  "2025-07-11",
+  "2025-07-04",
+  "2025-07-08",
+  "2025-07-12",
+  "2025-07-05",
+  "2025-07-09",
+  "2025-07-13"
+))
+
 # Data for map
 switzerland_sf <- readRDS("data/switzerland_sf.rds")
 hotels <- readr::read_csv("data/geocoded_hotels.csv")
@@ -310,7 +326,9 @@ forecast_cell <- function(name, ...) {
   )
 }
 
-make_forecast <- function(df) {
+make_forecast <- function(df, day) {
+  df <- dplyr::filter(df, date == day) |>
+    select(-date)
   reactable(
     arrange(df, -winner),
     defaultPageSize = 16,
