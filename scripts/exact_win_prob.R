@@ -52,7 +52,9 @@ res <- tibble()
 for (d in dates) {
   P_group_date <- P_group
   tmp_sched <- schedule |>
-    dplyr::filter(Date <= d, Result != "-:-")
+    dplyr::filter(Date <= d, Result != "-:-") |> 
+    mutate(Result = str_remove(Result, "\\(.*\\)"))
+
   if (nrow(tmp_sched) > 0) {
     tmp_sched <- tmp_sched |>
       separate(Result, into = c("home", "away"), sep = ":", convert = TRUE) |>
@@ -240,4 +242,5 @@ for (d in dates) {
   )
   res <- bind_rows(res, tmp)
 }
+
 saveRDS(res, "app/data/tournament_probabilities.rds")
