@@ -43,6 +43,7 @@ teams <- schedule |>
 # Filter played matches
 played_matches <- schedule |>
   filter(Result != "-:-") |>
+  mutate(Result = str_remove(Result, "\\(.*\\)")) |>
   separate(
     Result,
     into = c("HomeGoals", "AwayGoals"),
