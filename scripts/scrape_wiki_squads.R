@@ -42,11 +42,11 @@ for (node in nodes) {
 
       squad_tables[[length(squad_tables) + 1]] <- table
     }
+    if(current_country == "Wales"){
+      break
+    }
   }
 }
-
-squad_tables[[1]]
-
 # Combine all tables into one
 all_squads <- bind_rows(squad_tables)
 all_squads |>
