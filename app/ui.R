@@ -164,7 +164,7 @@ ui <- page_fluid(
           width = 6,
           div(
             h2("Prediction", class = "country"),
-            selectInput("forecast_date", "Select Date:", choices = dates),
+            selectInput("forecast_date", "Select Date:", choices = sort(dates)),
             reactableOutput("forecast", width = "100%"),
             class = "table-container",
           )
