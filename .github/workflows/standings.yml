@@ -36,7 +36,7 @@ jobs:
         run: Rscript ./scripts/scrape_schedule.R
       
       - name: update win_prob
-        run: ./scripts/exact_win_prob.R
+        run: Rscript ./scripts/exact_win_prob.R
       
       - name: Commit and push updated RDS files
         run: |
