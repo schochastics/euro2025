@@ -30,14 +30,18 @@ jobs:
             any::ragg
             any::tidyverse 
             any::rvest
+            any::tidyr
         
-      - name: Run R script
+      - name: update schedule
         run: Rscript ./scripts/scrape_schedule.R
-
+      
+      - name: update win_prob
+        run: ./scripts/exact_win_prob.R
+      
       - name: Commit and push updated RDS files
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
-          git add app/data/standings_complete.rds app/data/schedule.rds
-          git commit -m "Update standings and schedule [auto]" || echo "No changes to commit"
+          git add app/data/standings_complete.rds app/data/schedule.rds app/data/tournament_probabilities.rds
+          git commit -m "Update standings, schedule and probabilities [auto]" || echo "No changes to commit"
           git push
