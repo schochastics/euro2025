@@ -27,7 +27,7 @@ jobs:
 
       - name: Install pkgs
         run: |
-          pak::pkg_install(c("tidyverse","rvest"), dependencies = TRUE)
+          pak::pak(c("tidyverse","rvest"), dependencies = TRUE)
         shell: Rscript {0}
         
       - name: Run R script
