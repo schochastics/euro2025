@@ -32,7 +32,7 @@ jobs:
             any::rvest
         
       - name: Run R script
-        run: Rscript -e scripts/scrape_schedule.R
+        run: Rscript ./scripts/scrape_schedule.R
 
       - name: Commit and push updated RDS files
         run: |
