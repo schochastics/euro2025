@@ -32,6 +32,7 @@ jobs:
             any::rvest
             any::tidyr
             any::gtools
+            any::stringr
         
       - name: update schedule
         run: Rscript ./scripts/scrape_schedule.R
