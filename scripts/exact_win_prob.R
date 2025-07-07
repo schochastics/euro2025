@@ -1,5 +1,6 @@
 library(dplyr)
 library(tidyr)
+library(stringr)
 
 rank_tbl_grp <- readRDS("app/data/fifa_ranking.rds")
 P_group <- readRDS("app/data/P_group.rds")
