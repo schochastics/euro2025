@@ -1,8 +1,24 @@
 # server.R
 
 library(shiny)
-
+user_base <- readRDS("user_base.rds")
+# call the logout module with reactive trigger to hide/show
 server <- function(input, output) {
+  logout_init <- shinyauthr::logoutServer(
+    id = "logout",
+    active = reactive(credentials()$user_auth)
+  )
+  credentials <- shinyauthr::loginServer(
+    id = "login",
+    data = user_base,
+    user_col = user,
+    pwd_col = password,
+    sodium_hashed = TRUE,
+    log_out = reactive(logout_init())
+  )
+  user_data <- reactive({
+    credentials()$info
+  })
   v <- reactiveValues(country = "Belgium")
 
   lapply(names(country_map), function(id) {
@@ -34,48 +50,60 @@ server <- function(input, output) {
   })
   output$squads <- renderReactable({
     print(v$country)
+    req(credentials()$user_auth)
     make_squad(squads, v$country)
   })
 
   output$map <- renderLeaflet({
+    req(credentials()$user_auth)
     swiss_map()
   })
 
   output$tableA <- renderReactable({
+    req(credentials()$user_auth)
     make_table(standings_complete, "A")
   })
 
   output$tableB <- renderReactable({
+    req(credentials()$user_auth)
     make_table(standings_complete, "B")
   })
 
   output$tableC <- renderReactable({
+    req(credentials()$user_auth)
     make_table(standings_complete, "C")
   })
 
   output$tableD <- renderReactable({
+    req(credentials()$user_auth)
     make_table(standings_complete, "D")
   })
   output$scheduleA <- renderReactable({
+    req(credentials()$user_auth)
     make_schedule(schedule, "A")
   })
 
   output$scheduleB <- renderReactable({
+    req(credentials()$user_auth)
     make_schedule(schedule, "B")
   })
 
   output$scheduleC <- renderReactable({
+    req(credentials()$user_auth)
     make_schedule(schedule, "C")
   })
 
   output$scheduleD <- renderReactable({
+    req(credentials()$user_auth)
     make_schedule(schedule, "D")
   })
   output$fifa_ranking <- renderReactable({
+    req(credentials()$user_auth)
     make_fifa(fifa_ranking)
   })
 
   output$forecast <- renderReactable({
+    req(credentials()$user_auth)
     make_forecast(forecast, input$forecast_date)
   })
 
@@ -90,6 +118,7 @@ server <- function(input, output) {
   })
 
   observeEvent(c(input$country1, input$country2), {
+    req(credentials()$user_auth)
     req(input$country1, input$country2)
     country1 <- input$country1
     country2 <- input$country2

@@ -29,7 +29,10 @@ my_theme <- bs_theme(
 
 ui <- page_fluid(
   theme = my_theme,
-
+  # add logout button UI
+  div(class = "pull-right", shinyauthr::logoutUI(id = "logout")),
+  # add login panel UI function
+  shinyauthr::loginUI(id = "login"),
   # ─── NAVSET_PILL: the pill navigation itself ────────────────────────────────
   navset_pill(
     id = "tab",
